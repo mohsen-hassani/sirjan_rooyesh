@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    مسابقه هفتگی رویش
+{% endblock title %}
+
+{% block header1 %}
+    مهر
+{% endblock header1 %}
+
+{% block header3 %}
+        مسابقه هفتگی رویش
+{% endblock header3 %}
+
+{% block content %}
+
+
+    <div class="w3-container w3-center">
+        <h2 class="w3-padding-64">هفته ها</h2>
+    </div>
+
+    {% if week_list %}
+    <div class="w3-row w3-padding-large">
+        {% for w in week_list %}
+            <div class="w3-quarter w3-right">
+                <div class="w3-padding-small">
+                    <div class="w3-card-2">
+                        <header class="w3-container w3-padding">
+                            <h3>
+                                {{w.week_name}}
+                            </h3>
+                        </header>
+                        <div class="w3-padding-large">
+                            <p>
+                                شروع هفته:
+                                {{w.start_date}}
+                            </p>
+                            <p>
+                                پایان هفته:
+                                {{w.expire_date}}
+                            </p>
+                            <p>
+                                شرکت کنندگان:
+                                {% if w.total_answers %}
+                                    {{w.total_answers}}
+                                    نفر
+                                {% else %}
+                                    نامشخص
+                                {% endif %}
+                            </p>
+                            <p>
+                               وضعیت :
+                               {% if w.expired %}
+                                <span style="color:darkred">
+                                    اتمام هفته
+                                   </span>
+                                {% else %}
+                                    <span style="color:green">
+                                    در حال اجرا
+                                   </span>
+                               {% endif %}
+
+
+                            </p>
+                            <a href="{% url 'week' w.id %}" class="w3-text-blue">مشاهده سوالات</a>
+                        </div>
+                        {% if w.expired %}
+                            <footer class="w3-container w3-gray w3-block" style="padding:0px">
+                                <h5 style="display: block; padding: 8px 16px" class="w3-center">اتمام هفته</h5>
+                            </footer>
+                        {% else %}
+                            <footer class="w3-container w3-green w3-btn w3-hover-white w3-block" style="padding:0px">
+                                <h5 style="padding:0px" class="w3-center"><a style="display: block; padding: 8px 16px" href="{% url 'answer' w.id %}">شرکت در مسابقه</a></h5>
+                            </footer>
+                       {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+
+    {% else %}
+    <p>هنوز هفته ای منتشر نشده است</p>
+    {% endif %}
+
+
+    <br><br>
+
+    <div class="w3-container w3-center">
+        <h2 class="w3-padding-64">امتیازات</h2>
+    </div>
+    {% if scores %}
+        <div class="w3-container w3-responsive">
+            <table class="w3-table-all w3-hoverable w3-table-all w3-centered">
+                <thead>
+                    <tr class="w3-green">
+                        <td>شماره دانشجویی</td>
+                        <td>هفته اول</td>
+                        <td>هفته دوم</td>
+                        <td>هفته سوم</td>
+                        <td>هفته چهارم</td>
+                        <td>هفته پنجم</td>
+                        <td>هفته ششم</td>
+                        <td>هفته هفتم</td>
+                        <td>مجموع</td>
+                    </tr>
+                </thead>
+                {% for score in scores %}
+                <tr>
+                    <!--<td>{{score.id}}</td>-->
+                    <td>{{score.student_code}}</td>
+                    <td>{{score.week1}}</td>
+                    <td>{{score.week2}}</td>
+                    <td>{{score.week3}}</td>
+                    <td>{{score.week4}}</td>
+                    <td>{{score.week5}}</td>
+                    <td>{{score.week6}}</td>
+                    <td>{{score.week7}}</td>
+                    <td>{{score.all_weeks}}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+    {% else %}
+        <div class="w3-container w3-center">
+            <p>پس از ثبت، می‌توانید از این قسمت امتیازات را مشاهده کنید </p>
+        </div>
+    {% endif %}
+    <br><br>
+
+{% endblock content %}

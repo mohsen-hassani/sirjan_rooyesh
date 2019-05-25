@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+
+{% block header2 %}
+        پنل کاربری
+{% endblock header2 %}
+
+{% block header3 %}
+    خوش آمدید {{user.first_name}} {{user.last_name}}
+    <a href="{% url 'do_logout' %}">
+        خروج
+    </a>
+{% endblock header3 %}
+
+
+{% block content %}
+    {% if weeks %}
+    <div>
+        <p>هفته ها </p>
+        
+        {% for w in weeks %}
+            
+            {{w.week_name}}
+            {% for q in w.question_set.all %}
+                <p>
+                    {{q}}
+                </p>
+            {% endfor %}
+            <br><br>
+        {% endfor %}
+
+    </div>
+    {% else %}
+    <p>There is no record yet.</p>
+    {% endif %}      
+
+
+    <p>
+        <a href="{% url 'login' %}">برای شرکت در مسابقه باید وارد سایت شوید. برای ورود روی این متن کلیک کنید</a>
+    </p>
+
+{% endblock content %}

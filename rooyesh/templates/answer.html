@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+
+{% block header2 %}
+        پنل کاربری
+{% endblock header2 %}
+
+{% block header3 %}
+    خوش آمدید {{user.first_name}} {{user.last_name}}
+    <a href="{% url 'do_logout' %}">
+        خروج
+    </a>
+{% endblock header3 %}
+
+
+{% block content %}
+    {% if questions %}
+    <div class="w3-padding-64 w3-container w3-right w3-right-align w3-mobile">
+        <div class="w3-center w3-container">
+            <h3>سوالات {{week.week_name}}</h3>
+        </div>
+
+            {% if answers %}
+             <div class="w3-panel w3-round-large" style="color:#1c7700; background-color: #f4fff4; border:1px #1c7700 solid;">
+                 <div class="w3-padding">
+                    <h4>پاسخ های ارسالی</h4>
+                    <ol>
+                        {% for answer in answers %}
+                        <li>
+                            {{answer.choice.choice_text}}
+                        </li>
+                        {% endfor %}
+                    </ol>
+                 </div>
+
+            </div>
+            {% endif %}
+
+            {% if message %}
+                <h4>مهلت پاسخ دادن به سوالات تمام شده است</h4>
+            {% endif %}
+
+
+        <form action={% url 'do_answer' week.id %} method="POST" >
+        {% csrf_token %}
+        {% for q in questions %}
+            <fieldset id="questions">
+                    <h4>{{q.question_text}}</h4>
+                    {% for c in q.choice_set.all %}
+                        <label class="c-container">{{c.choice_text}}
+                          <input type="radio" name="{{q.id}}" value="{{c.id}}">
+                          <span class="c-checkmark"></span>
+                        </label>
+                    {% endfor %}
+                    <br><br>
+              </fieldset>
+        {% endfor %}
+        <br>
+        <input type="submit" value="ارسال" class="w3-button w3-green w3-round-large"/>
+        </form>
+    </div>
+    {% else %}
+    <p>برای این هفته سوالی تعریف نشده است</p>
+    {% endif %}
+
+
+{% endblock content %}

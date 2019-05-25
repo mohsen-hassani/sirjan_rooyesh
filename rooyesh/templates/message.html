@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block header2 %}
+        پنل کاربری
+{% endblock header2 %}
+
+{% block header3 %}
+    خوش آمدید {{user.first_name}} {{user.last_name}}
+    <a href="{% url 'do_logout' %}">
+        خروج
+    </a>
+{% endblock header3 %}
+
+
+{% block content %}
+
+    {% if message %}
+    <div class="w3-panel w3-pale-red w3-center w3-padding-large" style="margin:20px; border:1px solid darkred">
+        <h4 style="color:darkred">{{message}}</h4>
+    </div>
+    {% endif %}
+
+{% endblock content %}

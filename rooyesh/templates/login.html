@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+{% block header2 %}
+    ورود به سایت
+{% endblock header2 %}
+
+
+{% block content %}
+    <div class="w3-container w3-mobile" style="max-width:500px; margin:0px auto;">
+            <div class="w3-container w3-light-grey">
+                <h2>ورود به سایت</h2>
+            </div>
+
+            <form class="w3-container w3-padding-32" action="{% url 'do_login' %}" method="POST">
+                {% csrf_token %}
+                <label class=""><b>نام کاربری</b><span class="required">*</span></label>
+                <input class="w3-input w3-border w3-light-grey" required name='username' id='username' type="text">
+                <label class=""><b>رمز عبور</b><span class="required">*</span></label>
+                <input required name='password' id='password' type="password" class="w3-input w3-border w3-light-grey">
+                {% if error_message %}
+                    <p class="error-message">
+                        {{error_message}}
+                    </p>
+                {%endif%}
+                <br>
+                <button class="w3-btn w3-green">ورود</button>
+            </form>
+
+    </div>
+{% endblock content %}

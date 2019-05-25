@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+
+{% block header2 %}
+        مسابقه هفتگی رویش
+{% endblock header2 %}
+
+{% block header3 %}
+    {{week.week_name}}
+{% endblock header3 %}
+
+
+{% block content %}
+    {% if week %}
+    <div class="w3-container w3-context w3-center w3-mobile">
+        <p>سوالات هفته</p>
+        <br/><br/>
+
+        <div class="w3-center">
+            <div class="w3-mobile w3-right-align">
+                {% for q in questions %}
+                    <b>{{q.question_text}}</b>
+                    {% for c in q.choice_set.all %}
+                        <p>
+                            {{c.choice_text}}
+                            {% if c.is_answer %}
+                                <b>(گزینه صحیح)</b>
+                            {% endif %}
+                        </p>
+                    {% endfor %}
+                    {% if q.comment %}
+                        <div class="w3-panel w3-round-large" style="color:#1c7700; background-color: #f4fff4; border:1px #1c7700 solid;">
+                          <div class="w3-padding">
+                            <h4>توضیحات</h4>
+                            <p>
+                                {{q.comment}}
+                            </p>
+                          </div>
+                        </div>
+                    {% endif %}
+
+                    <br>
+                {% endfor %}
+            </div>
+        </div>
+
+
+    </div>
+    {% else %}
+    <p>There is no record yet.</p>
+    {% endif %}
+
+
+    <p class="w3-center">
+            <a class="w3-button w3-green w3-round-large" href="{% url 'answer' week.id %}">
+                شرکت در مسابقه
+            </a>
+    </p>
+
+{% endblock content %}

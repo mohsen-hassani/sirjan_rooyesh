@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    مسابقه هفتگی رویش
+{% endblock title %}
+
+{% block header1 %}
+    مهر
+{% endblock header1 %}
+
+{% block header3 %}
+        مسابقه هفتگی رویش
+{% endblock header3 %}
+
+{% block content %}
+
+
+    <div class="w3-container w3-center">
+        <h2 class="w3-padding-64">
+            {{blog_title}}
+        </h2>
+    </div>
+    <div class="w3-contaner w3-padding" style="max-width:850px; margin:0px auto">
+       	{% for key,value in content.items %}
+       	    <p>
+           	    <h4>{{key}}</h4>
+           	    {% for k,v in value.items %}
+           	        {{v}}<br/>
+           	    {% endfor %}
+       	    </p><br/>
+       	{% endfor %}
+    </div>
+
+{% endblock content %}

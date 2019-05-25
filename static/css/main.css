@@ -1,0 +1,238 @@
+body{
+    margin: 0px;
+    font-family: tahoma, 'century gothic light';
+}
+
+h1,h2,h3,h4,h5,h6{
+    margin: 0px;
+}
+
+a{
+    text-decoration: none;
+}
+
+
+label{
+    display: block;
+}
+
+input{
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: #eee;
+    padding: 10px;
+}
+
+thead{
+    font-weight: bold;
+}
+
+textarea{
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: #bbb;
+    padding: 10px;
+}
+
+.required{
+    color: red;
+}
+
+.half{
+    width: 50%;
+}
+
+.full{
+    width: 100%;
+}
+
+.field{
+    padding: 10px;
+}
+
+.title{
+    background-color: #ededed;
+    padding: 150px;
+}
+
+
+.multi_line{
+    height: 100px;
+}
+
+.title h3{
+    font-size:2.5em;
+}
+
+.title h2{
+    font-size:3.5em;
+}
+
+.title h1{
+    font-size:6em;
+}
+
+.no-comment{
+    margin: 100px 0px;
+}
+
+.content{
+    width: 1000px;
+    margin: 0px auto;
+}
+
+.author{
+    margin: 30px;
+}
+
+.author-desc{
+    font-size: small;
+    color: #555;
+}
+
+.author-desc p{
+    margin: 0px;
+}
+
+.article{
+    line-height: 1.5em;
+}
+
+.profile{
+    border-radius: 25px;
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
+}
+
+.clear{
+    clear: both;
+}
+
+.align-left{
+    text-align: left;
+    padding: 5px 20px;
+}
+
+.align-right{
+    text-align: right;
+    padding: 5px 20px;
+}
+
+.flow-right{
+    direction: rtl;
+}
+
+.comment{
+    margin: 50px 30px;
+}
+
+.comments{
+    margin: 100px auto;
+    text-align: left;
+    width: 1000px;
+}
+
+.comments p{
+    margin: 1px;
+}
+
+.comments-head{
+    font-size: xx-large;
+    margin: 2px;
+}
+
+
+.footer{
+    margin-top: 20px;
+    padding: 10px 30px;
+    background-color: #ededed;
+}
+
+.footer p{
+    width: 1000px;
+    margin: 0px auto;
+    text-align: center;
+}
+
+.error-message{
+    color: red;
+}
+
+.table{
+    width: 700px;
+    margin: 0px auto;
+}
+
+
+
+
+.c-container {
+  display: block;
+  position: relative;
+  padding-right: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.c-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom radio button */
+.c-checkmark {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #ddd;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.c-container:hover input ~ .c-checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.c-container input:checked ~ .c-checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.c-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.c-container input:checked ~ .c-checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.c-container .c-checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}

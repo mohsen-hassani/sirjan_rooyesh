@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            {% block title %}
+            مسابقه هفتگی رویش
+            {% endblock title %}
+        </title>
+        <link href={% static 'css/w3.css' %} rel="stylesheet" type="text/css" />
+        <link href={% static 'css/main.css' %} rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body>
+        <div class="w3-top">
+            <div class="w3-bar w3-light-gray w3-card ">
+                <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+                <a href="{% url 'index' %}" class="w3-bar-item w3-button w3-padding-large w3-right w3-hide-small">خانه</a>
+                <div class="w3-dropdown-hover w3-hide-small w3-right">
+                    <button class="w3-padding-large w3-button" title="More">
+                         هفته ها
+                    </button>
+                    <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                        {% if week_list %}
+                            {% for w in week_list %}
+                                <a href={% url 'week' w.id %} class="w3-bar-item w3-button w3-right-align">{{w.week_name}}</a>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                <a href="{% url 'blog' 'guide' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">راهنمای استفاده از سایت</a>
+                <a href="{% url 'blog' 'rules' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">قوانین مسابقه</a>
+                {% if user.username %}
+                    <div class="w3-dropdown-hover">
+                        <button class="w3-padding-large w3-button w3-right" title="More">
+                                {{user.first_name}} {{user.last_name}}
+                            خوش آمدید <i class="fa fa-caret-down"></i></button>
+                        <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                            <a href="#" class="w3-bar-item w3-button">تغییر رمز ورود</a>
+                            <a href={% url 'do_logout' %} class="w3-bar-item w3-button">خروج از سایت</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-padding-large">ورود به سایت</a>
+                {% endif %}
+            </div>
+        </div>
+        <div id="navDemo" class="w3-bar-block w3-light-gray w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+          <a href="{% url 'index' %}" class="w3-bar-item w3-button w3-padding-large w3-right-align" onclick="myFunction()">خانه</a>
+          <a href="{% url 'blog' 'guide' %}" class="w3-bar-item w3-button w3-padding-large w3-right-align" onclick="myFunction()">راهنمای استفاده از سایت</a>
+          <a href="{% url 'blog' 'rules' %}" class="w3-bar-item w3-button w3-padding-large w3-right-align" onclick="myFunction()">قوانین مسابقه</a>
+        </div>
+        <div class="main">
+                <div class="mySlides w3-display-container w3-center">
+                    <img src={% static 'images/banner.jpg' %} class="w3-grayscale" style="width:100%; margin-top:46px">
+                    <div class="w3-display-bottommiddle w3-panel w3-black w3-text-white w3-opacity-min w3-hide-small" style="padding:0px 100px">
+                        <h3>مهر</h3>
+                        <p><b>مسابقه هفتگی رویش</b></p>
+                    </div>
+                </div>
+
+            <!-- <div class="title">
+                <h1>
+                    {% block header1 %}
+
+                    {% endblock header1 %}
+                </h1>
+                <h2>
+                    {% block header2 %}
+
+                    {% endblock header2 %}
+                </h2>
+                <h3>
+                    {% block header3 %}
+
+                    {% endblock header3 %}
+                </h3>
+            </div> -->
+
+            {% block content %}
+            {% endblock content %}
+
+            {% block comments %}
+            {% endblock comments %}
+
+            </div>
+            <div class="footer">
+                <p class="w3-mobile">
+                    نهاد نمایندگی مقام معظم رهبری در دانشگاه صنعتی سیرجان
+                </p>
+            </div>
+            <script>
+                // Automatic Slideshow - change image every 4 seconds
+                var myIndex = 0;
+                carousel();
+
+                function carousel() {
+                  var i;
+                  var x = document.getElementsByClassName("mySlides");
+                  for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                  }
+                  myIndex++;
+                  if (myIndex > x.length) {myIndex = 1}
+                  x[myIndex-1].style.display = "block";
+                  setTimeout(carousel, 4000);
+                }
+
+                // Used to toggle the menu on small screens when clicking on the menu button
+                function myFunction() {
+                  var x = document.getElementById("navDemo");
+                  if (x.className.indexOf("w3-show") == -1) {
+                    x.className += " w3-show";
+                  } else {
+                    x.className = x.className.replace(" w3-show", "");
+                  }
+                }
+
+                // When the user clicks anywhere outside of the modal, close it
+                var modal = document.getElementById('ticketModal');
+                window.onclick = function(event) {
+                  if (event.target == modal) {
+                    modal.style.display = "none";
+                  }
+                }
+                </script>
+        </body>
+    </html>
